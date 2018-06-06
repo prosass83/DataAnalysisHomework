@@ -1,8 +1,8 @@
 // Get references to the tbody element, input field and button
 var $tbody = document.querySelector("tbody");
-//var $stateInput = document.querySelector("#state");
+var $filterInput = document.querySelector("#filter");
 var $searchBtn = document.querySelector("#search");
-var $datetimeInput = document.querySelector("#datetime");
+var $searchInput = document.querySelector("#searchString");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
@@ -30,15 +30,64 @@ function renderTable() {
 
 function handleSearchButtonClick() {
     // Format the user's search by removing leading and trailing whitespace, lowercase the string
-    var filterDatetime = $datetimeInput.value.trim().toLowerCase();
+    var filterSearchText = $searchInput.value.trim().toLowerCase();
+    var filterSearchType = $filterInput.value.trim().toLowerCase();
   
     // Set filteredAddresses to an array of all addresses whose "datetime" matches the filter
-    filteredAddresses = dataSet.filter(function(address) {
-      var addressState = address.datetime.toLowerCase();
-  
-      // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
-      return addressState === filterDatetime;
-    });
+    switch (filterSearchType) {
+      case "datetime":
+        console.log("Here. The filter type used is: ")
+        console.log(filterSearchType)
+        console.log("And the value to search for is: ")
+        console.log($searchInput.value)
+        filteredAddresses = dataSet.filter(function(address) {
+        var addressState = address.datetime.toLowerCase();
+    
+        // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+        return addressState === filterSearchText;
+      });
+        break;
+      case "city":
+        console.log("Here. The filter type used is: ")
+        console.log(filterSearchType)
+        filteredAddresses = dataSet.filter(function(address) {
+        var addressState = address.city.toLowerCase();
+    
+        // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+        return addressState === filterSearchText;
+      });
+        break;
+      case "state":
+        console.log("Here. The filter type used is: ")
+        console.log(filterSearchType)
+        filteredAddresses = dataSet.filter(function(address) {
+        var addressState = address.state.toLowerCase();
+    
+        // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+        return addressState === filterSearchText;
+      });
+        break;
+      case "country":
+        console.log("Here. The filter type used is: ")
+        console.log(filterSearchType)
+        filteredAddresses = dataSet.filter(function(address) {
+        var addressState = address.country.toLowerCase();
+    
+        // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+        return addressState === filterSearchText;
+      });
+      break;
+      case "shape":
+        console.log("Here. The filter type used is: ")
+        console.log(filterSearchType)
+        filteredAddresses = dataSet.filter(function(address) {
+        var addressState = address.shape.toLowerCase();
+    
+        // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+        return addressState === filterSearchText;
+      });
+        break;
+      }
     renderTable();
   }
 

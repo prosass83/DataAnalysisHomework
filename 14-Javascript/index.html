@@ -14,12 +14,24 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
-          <input type="text" class="form-control" id="datetime" placeholder="Datetime">
+          <input type="text" class="form-control" id="searchString" placeholder="Please select search type">
           <a id="search" class="btn btn-default">Search</a>
         </div>
       </div>
+      
+      <div class="col-md-6">
+          <div class="form-group">
+            <select id="filter" onchange="getData(this.value)">
+                <option value="datetime">DateTime</option>
+                <option value="city">City</option>
+                <option value="state">State</option>
+                <option value="country">Country</option>
+                <option value="shape">Shape</option>
+              </select>
+          </div>
+        </div>
     </div>
     <div class="row">
       <div class="col-md-12">
