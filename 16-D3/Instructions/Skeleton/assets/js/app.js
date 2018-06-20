@@ -74,7 +74,7 @@ d3.csv("assets/csv/data.csv", function(error, healthData) {
     .attr("transform", `translate(0, ${chartHeight})`)
     .call(bottomAxis);
 
-  svg.selectAll("circle")
+    var circlesGroup = svg.selectAll("circle")
     .data(healthData)
     .enter()
     .append("circle")
@@ -85,7 +85,7 @@ d3.csv("assets/csv/data.csv", function(error, healthData) {
     .attr("fill", "#00aa88")
     .attr("opacity", ".5");
 
-  //Seems to be only adding some states, not all 
+  //Seems to be only adding some states, not all, why? 
   svg.selectAll("text")
     .data(healthData)
     .enter()
@@ -98,6 +98,7 @@ d3.csv("assets/csv/data.csv", function(error, healthData) {
     .attr("fill", "white")
     .attr("opacity", ".75");
 
+    //Appending X Axis Label
     chartGroup.append("text")
     .attr("y",chartHeight + 20)
     .attr("x",chartWidth / 2)
@@ -107,7 +108,7 @@ d3.csv("assets/csv/data.csv", function(error, healthData) {
     .classed("axis-text", true)
     .text("In Poverty (%)");
 
-    // append y axis
+    //Appending Y Axis Label
     chartGroup.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - chartMargin.left)
@@ -118,6 +119,27 @@ d3.csv("assets/csv/data.csv", function(error, healthData) {
     .classed("axis-text", true)
     .text("Lacks Healtcare (%)");
 
+    //Added tooltip formatting in css file
+    // Initializing Tooltip
+    var toolTip = d3.tip()
+    .attr("class", "tooltip")
+    .offset([80, -60])
+    .html(function(d) {
+      return (`<strong>${d.state}<strong><hr>Poverty Rate: ${d.poverty}<br>Lack HealtCare Rate: ${d.health}
+      `);
+    });
+
+    // Step 2: Create the tooltip in chartGroup.
+    chartGroup.call(toolTip);
+
+    // Step 3: Create "mouseover" event listener to display tooltip
+    circlesGroup.on("mouseover", function(d) {
+      toolTip.show(d);
+    })
+    // Step 4: Create "mouseout" event listener to hide tooltip
+      .on("mouseout", function(d) {
+        toolTip.hide(d);
+      });
 
 });
 
