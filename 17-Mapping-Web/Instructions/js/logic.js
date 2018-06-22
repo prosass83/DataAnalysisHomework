@@ -1,5 +1,5 @@
 // Store our API endpoint inside queryUrl
-var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson";
+var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson";
 
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
@@ -7,16 +7,41 @@ d3.json(queryUrl, function(data) {
   createFeatures(data.features);
 });
 
-function createFeatures(earthquakeData) {
+function chooseRadius(mag) {
+  var radius = (mag-1)*4;
+  console.log("Magnitude: " + mag + " Radius: " + radius)
+  return radius;
+}
 
-  var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-  };
+function chooseColor(mag) {
+  var color = "#000";
+  //Coral colors, increasing in intensity
+  if (mag <= 3.0 ) {
+    console.log("Magnitude > 5")
+    color = "#FF7F50";
+    }
+    else if (mag > 3 && mag <= 4.0){
+      console.log("Magnitude <= 5")
+      color = "#FF7256";
+    }
+    else if (mag > 4 && mag <= 5.0){
+      console.log("Magnitude <= 5")
+      color = "#EE6A50";
+    }
+    else if (mag > 5 && mag <= 6.0){
+      console.log("Magnitude <= 5")
+      color = "#CD5B45";
+    }
+    else if (mag > 6){
+      console.log("Magnitude <= 5")
+      color = "#8B3E2F";
+    }
+      
+    
+  return color;
+}
+
+function createFeatures(earthquakeData) {
 
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the earthquake
@@ -29,6 +54,14 @@ function createFeatures(earthquakeData) {
   // Run the onEachFeature function once for each piece of data in the array
   var earthquakes = L.geoJSON(earthquakeData, {
     pointToLayer: function (feature, latlng) {
+      var geojsonMarkerOptions = {
+        radius: chooseRadius(feature.properties.mag),
+        fillColor: chooseColor(feature.properties.mag),
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      };
       return L.circleMarker(latlng, geojsonMarkerOptions);
     },
     onEachFeature: onEachFeature
