@@ -102,10 +102,38 @@ function createMap(earthquakes) {
     layers: [satellitemap, earthquakes]
   });
 
+
   // Create a layer control
   // Pass in our baseMaps and overlayMaps
   // Add the layer control to the map
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
+
+  
+// Create a legend to display information about our map
+var info = L.control({
+  position: "bottomright"
+});
+
+// When the layer control is added, insert a div with the class of "legend"
+info.onAdd = function() {
+  var div = L.DomUtil.create("div", "legend");
+  return div;
+};
+
+// Add the info legend to the map
+info.addTo(map);
+
+// I had to move this section after adding info to the map, otherwise the div 
+//legend had not been created by the time this section is executed
+document.querySelector(".legend").innerHTML = [
+  "<p class='lower-than-three'>0-3 </p>",
+  "<p class='three-four'>3-4 </p>",
+  "<p class='four-five'>4-5 </p>",
+  "<p class='five-six'>5-6 </p>",
+  "<p class='higher-than-six'>6+ </p>"
+].join("");
+
+
 }
