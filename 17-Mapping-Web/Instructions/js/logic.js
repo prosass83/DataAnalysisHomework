@@ -56,7 +56,7 @@ function createFeatures(earthquakeData, tectonicData) {
       "</h3><hr><p>" + feature.properties.place + "</p>");
   }
 
-  // Create a GeoJSON layer containing the features array on the earthquakeData object
+  // Create the GeoJSON layer containing the features array on the earthquakeData object
   // Run the onEachFeature function once for each piece of data in the array
   var earthquakes = L.geoJSON(earthquakeData, {
     pointToLayer: function (feature, latlng) {
@@ -150,7 +150,7 @@ info.addTo(myMap);
 // I had to move this section after adding info to the map, otherwise the div 
 //legend had not been created by the time this section is executed
 document.querySelector(".legend").innerHTML = [
-  "<p class='lower-than-three'>0-3 </p>",
+  "<p class='lower-than-three'><span></span> 0-3 </p>",
   "<p class='three-four'>3-4 </p>",
   "<p class='four-five'>4-5 </p>",
   "<p class='five-six'>5-6 </p>",

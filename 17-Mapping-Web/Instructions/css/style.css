@@ -26,6 +26,18 @@ html {
   color: #FF7F50;
 }
 
+.legend p span {
+  display: inline-block;
+  line-height: 16px;
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
+}
+
+.legend p.lower-than-three span {
+  background: #FF7F50;
+}
+
 .legend .three-four {
   color: #FF7256;
 }
