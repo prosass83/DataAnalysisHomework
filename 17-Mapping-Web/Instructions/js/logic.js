@@ -84,7 +84,7 @@ function createMap(earthquakes) {
 
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
-    "Street Map": streetmap,
+  //  "Street Map": streetmap,
     "Satellite Map": satellitemap
   };
 
@@ -123,7 +123,7 @@ info.onAdd = function() {
 };
 
 // Add the info legend to the map
-info.addTo(map);
+info.addTo(myMap);
 
 // I had to move this section after adding info to the map, otherwise the div 
 //legend had not been created by the time this section is executed
