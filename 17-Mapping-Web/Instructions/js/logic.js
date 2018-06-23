@@ -1,15 +1,19 @@
 // Store our API endpoint inside queryUrl
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson";
 
+var tectonicUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
+
 // Perform a GET request to the query URL
-d3.json(queryUrl, function(data) {
+d3.json(queryUrl, function(earthquakeData) {
   // Once we get a response, send the data.features object to the createFeatures function
-  createFeatures(data.features);
+  d3.json(tectonicUrl, function(tectonicData) {
+    createFeatures(earthquakeData.features, tectonicData.features);
+  });
 });
 
 function chooseRadius(mag) {
   var radius = (mag-1)*4;
-  console.log("Magnitude: " + mag + " Radius: " + radius)
+  //console.log("Magnitude: " + mag + " Radius: " + radius)
   return radius;
 }
 
@@ -41,13 +45,15 @@ function chooseColor(mag) {
   return color;
 }
 
-function createFeatures(earthquakeData) {
+function createFeatures(earthquakeData, tectonicData) {
 
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the earthquake
   function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3>" + feature.properties.place +
-      "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    console.log("Creating PopUp")
+    console.log("Magnitude: " +  feature.properties.mag + " Place: " +  feature.properties.place)
+    layer.bindPopup("<h3>" + feature.properties.mag +
+      "</h3><hr><p>" + feature.properties.place + "</p>");
   }
 
   // Create a GeoJSON layer containing the features array on the earthquakeData object
@@ -67,14 +73,24 @@ function createFeatures(earthquakeData) {
     onEachFeature: onEachFeature
   });
 
+  //Create second GeoJson layer with tectonic plates
+  var poligonStyle = {
+    "weight": 5,
+    "color": "#0404B4"
+};
+
+  var tectonicPlates = L.geoJSON(tectonicData, {
+    style: poligonStyle
+  });
+
   // Sending our earthquakes layer to the createMap function
-  createMap(earthquakes);
+  createMap(earthquakes, tectonicPlates);
 }
 
-function createMap(earthquakes) {
+function createMap(earthquakes, tectonicPlates) {
 
   // Define streetmap and satellitemap layers
-  var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?" +
+  var outdoormap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?" +
   "access_token=pk.eyJ1IjoicHJvc2FzcyIsImEiOiJjamlkdmdsdTcwZnJyM2x0NGZ2d2tnM2V0In0." +
   "lYdBMOj5aNZMNggd2U2BuA");
 
@@ -82,15 +98,21 @@ function createMap(earthquakes) {
   "access_token=pk.eyJ1IjoicHJvc2FzcyIsImEiOiJjamlkdmdsdTcwZnJyM2x0NGZ2d2tnM2V0In0." +
   "lYdBMOj5aNZMNggd2U2BuA");
 
+  var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?" +
+  "access_token=pk.eyJ1IjoicHJvc2FzcyIsImEiOiJjamlkdmdsdTcwZnJyM2x0NGZ2d2tnM2V0In0." +
+  "lYdBMOj5aNZMNggd2U2BuA");
+
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
-  //  "Street Map": streetmap,
+    "Light Map": lightmap,
+    "Outdoor Map": outdoormap,
     "Satellite Map": satellitemap
   };
 
   // Create overlay object to hold our overlay layer
   var overlayMaps = {
-    Earthquakes: earthquakes
+    Earthquakes: earthquakes,
+    TectonicPlates: tectonicPlates
   };
 
   // Create our map, giving it the streetmap and earthquakes layers to display on load
@@ -99,7 +121,7 @@ function createMap(earthquakes) {
       30, 0
     ],
     zoom: 3,
-    layers: [satellitemap, earthquakes]
+    layers: [satellitemap, earthquakes, tectonicPlates]
   });
 
 
