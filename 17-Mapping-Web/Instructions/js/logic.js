@@ -151,10 +151,10 @@ info.addTo(myMap);
 //legend had not been created by the time this section is executed
 document.querySelector(".legend").innerHTML = [
   "<p class='lower-than-three'><span></span> 0-3 </p>",
-  "<p class='three-four'>3-4 </p>",
-  "<p class='four-five'>4-5 </p>",
-  "<p class='five-six'>5-6 </p>",
-  "<p class='higher-than-six'>6+ </p>"
+  "<p class='three-four'><span></span> 3-4 </p>",
+  "<p class='four-five'><span></span> 4-5 </p>",
+  "<p class='five-six'><span></span> 5-6 </p>",
+  "<p class='higher-than-six'><span></span> 6+ </p>"
 ].join("");
 
 

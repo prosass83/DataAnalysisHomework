@@ -17,7 +17,7 @@ html {
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     padding: 6px 8px;
-    width: 180px;
+    width: 50px;
     line-height: 18px;
     color: #555;
 }
@@ -42,14 +42,30 @@ html {
   color: #FF7256;
 }
 
+.legend p.three-four span {
+  background: #FF7256;
+}
+
 .legend .four-five {
   color: #EE6A50;
+}
+
+.legend p.four-five span {
+  background: #EE6A50;
 }
 
 .legend .five-six{
   color: #CD5B45;
 }
 
-.legend .higher-than-6 {
+.legend p.five-six span {
+  background: #CD5B45;
+}
+
+.legend .higher-than-six {
   color: #8B3E2F;
+}
+
+.legend p.higher-than-six span {
+  background: #8B3E2F;
 }
