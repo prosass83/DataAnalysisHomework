@@ -1,0 +1,71 @@
+/* remove default margin and padding from body */
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* set map, body, and html to 100% of the screen size */
+#map,
+body,
+html {
+  height: 100%;
+}
+
+.legend {
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: rgba(255,255,255, 0.9);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 6px 8px;
+    width: 50px;
+    line-height: 18px;
+    color: #555;
+}
+
+.legend .lower-than-three {
+  color: #FF7F50;
+}
+
+.legend p span {
+  display: inline-block;
+  line-height: 16px;
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
+}
+
+.legend p.lower-than-three span {
+  background: #FF7F50;
+}
+
+.legend .three-four {
+  color: #FF7256;
+}
+
+.legend p.three-four span {
+  background: #FF7256;
+}
+
+.legend .four-five {
+  color: #EE6A50;
+}
+
+.legend p.four-five span {
+  background: #EE6A50;
+}
+
+.legend .five-six{
+  color: #CD5B45;
+}
+
+.legend p.five-six span {
+  background: #CD5B45;
+}
+
+.legend .higher-than-six {
+  color: #8B3E2F;
+}
+
+.legend p.higher-than-six span {
+  background: #8B3E2F;
+}

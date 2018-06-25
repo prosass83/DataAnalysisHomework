@@ -1,0 +1,79 @@
+{
+    "type": "FeatureCollection",
+    "metadata": {
+    "generated": 1529804000000,
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson",
+    "title": "USGS Magnitude 4.5+ Earthquakes, Past Day",
+    "status": 200,
+    "api": "1.5.8",
+    "count": 3
+    },
+    "features": [
+    {
+    "type": "Feature",
+    "properties": {
+        "city": "Manchester",
+        "company": "Emerson Ecologics",
+        "duration": "NEW",
+        "rating": 3.4,
+        "salaryMAX": 73000,
+        "salaryMED": 56000,
+        "salaryMIN": 42000,
+        "state": "NH",
+        "title": "Data Analyst"
+    },
+    "geometry": {
+    "type": "Point",
+    "coordinates": [
+        -71.4445,
+        42.9844
+    ]
+    },
+    "id": "us1000ezwv"
+    },
+    {
+    "type": "Feature",
+    "properties": {
+        "city": "Boca Raton",
+        "company": "Infinity Sales Group",
+        "duration": "11d",
+        "rating": 2.9,
+        "salaryMAX": 69000,
+        "salaryMED": 54000,
+        "salaryMIN": 40000,
+        "state": "FL",
+        "title": "Data Analyst"
+    },
+    "geometry": {
+    "type": "Point",
+    "coordinates": [
+        -80.1078,
+        26.3749
+    ]
+    },
+    "id": "us1000ezw9"
+    },
+    {
+    "type": "Feature",
+    "properties": {
+        "city": "Portland",
+        "company": "Simple",
+        "duration": "4d",
+        "rating": 2.8,
+        "salaryMAX": 74000,
+        "salaryMED": 56000,
+        "salaryMIN": 43000,
+        "state": "OR",
+        "title": "Data Analyst"
+    },
+    "geometry": {
+    "type": "Point",
+    "coordinates": [
+        -122.7948,
+        45.5426
+    ]
+    },
+    "id": "us1000ezuy"
+    }
+]}
+    
